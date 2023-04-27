@@ -7,12 +7,12 @@ metadata:
   name: nginx
 spec:
   containers:
-  - image: shryu-ncr.kr.ncr.ntruss.com/test/nginx:35
+    - image: "docker URL/project/image:tag"
     name: nginx
     ports:
     - containerPort: 80
   imagePullSecrets:
-  - name: regred
+  - name: "도커 ID,PW,URL을 적은 secret을 생성하고 그걸 여기 적는다"
 ---
 apiVersion: v1
 kind: Service
