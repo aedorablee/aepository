@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ttl-cronjob
+  namespace: cron
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec: 
+      ttlSecondsAfterFinished: 50
+      template: 
+        spec:
+          containers:
+          - name: cron-container
+            image: perl
+            command: ["perl", "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+          restartPolicy: Never
+      backoffLimit: 4
+  successfulJobsHistoryLimit: 4
+  failedJobsHistoryLimit: 4

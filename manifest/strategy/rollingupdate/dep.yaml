@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: rolling
+  name: rolling
+  namespace: production
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: rolling
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: rolling
+    spec:
+      containers:
+      - image: nginx:1.9.0
+        name: nginx
